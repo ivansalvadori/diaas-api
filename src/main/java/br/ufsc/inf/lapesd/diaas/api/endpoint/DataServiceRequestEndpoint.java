@@ -67,7 +67,6 @@ public class DataServiceRequestEndpoint {
     @Path("{requestId}/data")
     @Produces(MediaType.APPLICATION_JSON)
     public Response uploadDataFile(@PathParam("requestId") String requestId, @FormDataParam("dataFile") InputStream file, @FormDataParam("dataFile") FormDataContentDisposition fileDisposition) {
-        String fileName = fileDisposition.getFileName();
         saveFile(requestId, file, "data.csv");
         return Response.ok().build();
     }
