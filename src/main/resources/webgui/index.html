@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>diaas - Data Integration as a Service</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="/diaas/bootstrap.css" rel="stylesheet" media="screen">
+<script src="/diaas/jquery.js"></script>
+<script src="/diaas/bootstrap.js"></script>
+<script src="/diaas/index.js"></script>
+
+
+
+
+
+<style>
+body {
+	background-color: #FAFAFB;
+}
+</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12"
+				style="padding-top: 10px; background-color: #F1F1F2;">
+				<img src='/diaas/diaas-logo.gif' width=250 />
+			</div>
+
+			<div class="col-xs-5" style="padding: 10px;">
+				<div class="panel panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading">Request a new Data Service Instance</div>
+
+					<div style="padding: 20px;">
+						<form id="formMapping" enctype="multipart/form-data" method="post">
+							<label>Mapping file</label> <input id="mappingFile" type="file"	name="mappingFile" />
+							<span id="formMappingLog"></span>
+						</form>
+
+						<br />
+						<form id="formOntology" enctype="multipart/form-data"
+							method="post">
+							<label>Ontology file</label><input type="file" name="ontologyFile" />
+							<span id="formOntologyLog"></span>
+						</form>
+
+						<br />
+						<form id="formData" enctype="multipart/form-data" method="post">
+							<label>Data file (CSV or XML)</label><input type="file" name="dataFile" />
+							<span id="formDataLog"></span>
+						</form>
+
+						<br/>
+					    <a href="#" id="confirmRequest">Send Request</a> 
+					    <br/>
+						<span id="requestStatus"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-7" style="padding: 10px;">
+				<div class="panel panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">Data Service Requests</div>
+						</div>
+					</div>
+					<div id="mainPanel"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

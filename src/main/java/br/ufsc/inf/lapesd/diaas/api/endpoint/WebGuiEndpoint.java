@@ -19,26 +19,18 @@ public class WebGuiEndpoint {
     }
 
     @GET
-    @Path("newRequest.js")
+    @Path("index.js")
     @SuppressWarnings("resource")
     public Response newRequestJs() {
-        InputStream in = this.getClass().getResourceAsStream("/webgui/newRequest.js");
+        InputStream in = this.getClass().getResourceAsStream("/webgui/index.js");
         return Response.ok(in).build();
     }
 
     @GET
-    @Path("newRequest.html")
-    @SuppressWarnings("resource")
-    public Response newRequestHtml() {
-        InputStream in = this.getClass().getResourceAsStream("/webgui/newRequest.html");
-        return Response.ok(in).build();
-    }
-
-    @GET
-    @Path("/sddms-logo.gif")
+    @Path("/diaas-logo.gif")
     @SuppressWarnings("resource")
     public Response sddmsLogoJpg() {
-        InputStream in = this.getClass().getResourceAsStream("/webgui/sddms-logo.gif");
+        InputStream in = this.getClass().getResourceAsStream("/webgui/img/diaas-logo.gif");
         return Response.ok(in).build();
     }
 

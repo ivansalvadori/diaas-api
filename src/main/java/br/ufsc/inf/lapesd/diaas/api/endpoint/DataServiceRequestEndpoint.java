@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.util.Base64;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -78,6 +79,31 @@ public class DataServiceRequestEndpoint {
         DataServiceRequest request = loadRequestFile(requestId);
         requestDeploy(request);
         return Response.ok().build();
+    }
+
+    @GET
+    @Produces("application/ld+json")
+    public Response loadAllRequests() {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target(this.deployerURL + "/dataServiceRequest");
+        Invocation.Builder invocationBuilder = webTarget.request("application/ld+json");
+
+        String existingDataServiceRequests = "";
+
+        try {
+            Response response = invocationBuilder.get();
+
+            int status = response.getStatus();
+            if (status == 200) {
+                existingDataServiceRequests = response.readEntity(String.class);
+            } else if (status == 404) {
+                System.out.println("Error 404.");
+            }
+        } catch (Exception e) {
+            System.out.println("Something went wrong. Details: " + e.getMessage());
+        }
+
+        return Response.ok(existingDataServiceRequests).build();
     }
 
     private void saveDataServiceRequest(DataServiceRequest dataServiceRequest) {
