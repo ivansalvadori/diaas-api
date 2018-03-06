@@ -24,14 +24,14 @@ body {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12"
-				style="padding-top: 10px; background-color: #F1F1F2;">
+				style="padding-top: 10px; background-color: #ffeee6;">
 				<img src='/diaas/diaas-logo.gif' width=250 />
 			</div>
 
 			<div class="col-xs-5" style="padding: 10px;">
-				<div class="panel panel-primary">
+				<div class="panel panel-primary" style='border-color: #b32d00;'>
 					<!-- Default panel contents -->
-					<div class="panel-heading">Request a new Data Service Instance</div>
+					<div class="panel-heading" style='background-color: #b32d00;'><b>Request a new Data Service Instance</b></div>
 
 					<div style="padding: 20px;">
 						<form id="formMapping" enctype="multipart/form-data" method="post">
@@ -53,7 +53,7 @@ body {
 						</form>
 
 						<br/>
-					    <a href="#" id="confirmRequest">Send Request</a> 
+					    <a href="#" id="confirmRequest" style='color: #b32d00;'>Send Request</a> 
 					    <br/>
 						<span id="requestStatus"></span>
 					</div>
@@ -61,11 +61,16 @@ body {
 			</div>
 
 			<div class="col-xs-7" style="padding: 10px;">
-				<div class="panel panel-primary">
+				<div class="panel panel-primary" style='border-color: #b32d00;'>
 					<!-- Default panel contents -->
-					<div class="panel-heading">
+					<div class="panel-heading" style='background-color: #b32d00;' >
 						<div class="row">
-							<div class="col-xs-6">Data Service Requests</div>
+							<div class="col-xs-6"><b>Data Service Requests</b></div>
+							<div class="col-xs-6 text-right">
+								<button id="refresh" type="button"
+									class="btn btn-default btn-xs" aria-label="Left Align">
+									Refresh</button>
+							</div>
 						</div>
 					</div>
 					<div id="mainPanel"></div>

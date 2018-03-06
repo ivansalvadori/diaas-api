@@ -5,16 +5,21 @@ var listExisitingRequestDataService = function() {
 		url : "/diaas/dataServiceRequest",
 		type : 'GET',
 		async : true,
-		success : function(list) {
+		success : function(response) {
 			$("#mainPanel").empty();
 			itemsDiv = $("<div class='panel panel-default id=''>")
 			$("#mainPanel").append(itemsDiv);
 			
-			if (list["graph"] ) {
+			if (response["@graph"] ) {
+				itemCount = 0;
+				$.each(response["@graph"], function(index, item) {
+					addRequestToList(itemsDiv, item.dataServiceRequestId, item.runningDataServiceInstanceUri, 0)
+					itemCount++
+				});
 			}
 				
-			else {
-				addRequestToList(itemsDiv, "RequestID", "http://....", 0)
+			else if(response["@type"]){
+				addRequestToList(itemsDiv, response.dataServiceRequestId, response.runningDataServiceInstanceUri, 0)
 			}			
 		},
 		error : function() {
@@ -24,14 +29,13 @@ var listExisitingRequestDataService = function() {
 };
 
 addRequestToList = function(itemsDiv, requestID, instanceUrl, itemCount) {
-	itemLabel = requestID;
-	itemPanel = '<div class="panel-heading" role="tab" >'
-			+ '<h4 class="panel-title">'
-			+ '<a class="resourceLink" resourceuri="' + item
-			+ '" divtorender="resourceContentDiv_' + itemCount
-			+ '" role="button" data-toggle="collapse" href="#' + itemCount
+	itemPanel = '<div class="panel-heading" role="tab" style="border-color: #ffdccc; background-color: #ffeee6;" >'
+			+ '<h4 class="panel-title">'			
+			+ '<a role="button" target="_blank" href="' + instanceUrl
 			+ '" aria-expanded="false" aria-controls="' + itemCount + '">'
-			+ itemLabel + '</a>' + ' </h4>' + '</div>' + '<div id="'
+			+ instanceUrl + '</a>' 
+			+ '<span>&nbsp;(' + requestID + ')' + '</span>'
+			+ ' </h4>' + '</div>' + '<div id="'
 			+ itemCount + '" class="panel-collapse collapse">'
 			+ '<div id="resourceContentDiv_' + itemCount
 			+ '" class="panel-body">' + '</div>' + '</div>	'
@@ -121,7 +125,7 @@ finishRequest = function() {
 		cache : false,
 		timeout : 600000,
 		success : function(data) {
-			$("#requestStatus").text("Data Service " + requestId + " created!");
+			$("#requestStatus").html("Data Service <b>" + requestId + "</b> created!" + "<br>"+ "It may take some time to start the new instance.");
 		},
 		error : function(e) {
 
@@ -129,9 +133,15 @@ finishRequest = function() {
 	});
 }
 
-sendRequestListner = function() {
+sendRequestListener = function() {
 	$("#confirmRequest").click(function() {
 		createNewRequestDataService();		
+	});
+}
+
+refreshListener = function() {
+	$("#refresh").click(function() {
+		listExisitingRequestDataService();		
 	});
 }
 
@@ -156,6 +166,7 @@ var uploadFile = function(url, data, callback) {
 };
 
 $(document).ready(function() {
-	sendRequestListner();
+	sendRequestListener();
+	refreshListener();
 	listExisitingRequestDataService();
 });
