@@ -116,10 +116,13 @@ submitFormData = function() {
 }
 
 finishRequest = function() {
+	csvSeparator = $('#csvSeparator').val()
+	csvEncode = $('#csvEncode').val()
+	
 	$.ajax({
 		type : "POST",
 		enctype : 'application/json',
-		url : "/diaas/dataServiceRequest/" + requestId + "/confirm",
+		url : "/diaas/dataServiceRequest/" + requestId + "/confirm" + "?csvSeparator=" + csvSeparator + "&csvEncode=" + csvEncode ,
 		processData : false,
 		contentType : false,
 		cache : false,

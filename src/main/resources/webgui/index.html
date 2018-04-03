@@ -31,30 +31,48 @@ body {
 			<div class="col-xs-5" style="padding: 10px;">
 				<div class="panel panel-primary" style='border-color: #b32d00;'>
 					<!-- Default panel contents -->
-					<div class="panel-heading" style='background-color: #b32d00;'><b>Request a new Data Service Instance</b></div>
+					<div class="panel-heading" style='background-color: #b32d00;'>
+						<b>Request a new Data Service Instance</b>
+					</div>
 
 					<div style="padding: 20px;">
 						<form id="formMapping" enctype="multipart/form-data" method="post">
-							<label>Mapping file</label> <input id="mappingFile" type="file"	name="mappingFile" />
-							<span id="formMappingLog"></span>
+							<label style="float: left; width: 130px;">Mapping file:</label> 
+							<input id="mappingFile" type="file" name="mappingFile" /> <span id="formMappingLog"></span>
 						</form>
 
-						<br />
 						<form id="formOntology" enctype="multipart/form-data"
 							method="post">
-							<label>Ontology file</label><input type="file" name="ontologyFile" />
-							<span id="formOntologyLog"></span>
+							<label style="float: left; width: 130px;">Ontology file:</label>
+							<input type="file" name="ontologyFile" /> <span id="formOntologyLog"></span>
 						</form>
 
-						<br />
 						<form id="formData" enctype="multipart/form-data" method="post">
-							<label>Data file (CSV or XML)</label><input type="file" name="dataFile" />
-							<span id="formDataLog"></span>
+							<label style="float: left; width: 130px;">Data file:</label>
+							<input type="file" name="dataFile" /> <span id="formDataLog"></span>
 						</form>
 
-						<br/>
-					    <a href="#" id="confirmRequest" style='color: #b32d00;'>Send Request</a> 
-					    <br/>
+						<label style="float: left; width: 130px;">CSV Separator:</label>
+						<select id="csvSeparator" style="float: left; width: 200px;">
+							<option value="COMMA">Comma</option>
+							<option value="TAB">Tab</option>
+						</select>
+						<br />
+						<br />
+						
+						<label style="float: left; width: 130px;">CSV Encode:</label>
+						<select id="csvEncode" style="float: left; width: 200px;">
+							<option value="UTF-8">UTF-8</option>
+							<option value="US-ASCII">ISO646-US (US-ASCII)</option>
+							<option value="ISO-8859-1">ISO-8859-1 (ISO-LATIN-1)</option>
+							<option value="UTF-16BE">UTF-16BE</option>
+							<option value="UTF-16LE">UTF-16LE</option>
+							<option value="UTF-16">UTF-16</option>
+						</select>
+						
+						<br /> 
+						<br />
+						<a href="#" id="confirmRequest" style='color: #b32d00;'> Send Request</a> <br /> 
 						<span id="requestStatus"></span>
 					</div>
 				</div>
@@ -63,9 +81,11 @@ body {
 			<div class="col-xs-7" style="padding: 10px;">
 				<div class="panel panel-primary" style='border-color: #b32d00;'>
 					<!-- Default panel contents -->
-					<div class="panel-heading" style='background-color: #b32d00;' >
+					<div class="panel-heading" style='background-color: #b32d00;'>
 						<div class="row">
-							<div class="col-xs-6"><b>Data Service Requests</b></div>
+							<div class="col-xs-6">
+								<b>Data Service Requests</b>
+							</div>
 							<div class="col-xs-6 text-right">
 								<button id="refresh" type="button"
 									class="btn btn-default btn-xs" aria-label="Left Align">

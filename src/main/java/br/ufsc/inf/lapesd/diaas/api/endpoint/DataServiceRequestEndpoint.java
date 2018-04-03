@@ -13,6 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -26,6 +27,7 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.google.gson.Gson;
 
@@ -75,8 +77,22 @@ public class DataServiceRequestEndpoint {
     @POST
     @Path("{requestId}/confirm")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response confirm(@PathParam("requestId") String requestId) {
+    public Response confirm(@PathParam("requestId") String requestId, @QueryParam("csvSeparator") String csvSeparator, @QueryParam("csvEncode") String csvEncode) {
         DataServiceRequest request = loadRequestFile(requestId);
+
+        if (StringUtils.isEmpty(request.getCsvSeparator())) {
+            request.setCsvSeparator("COMMA");
+        }
+
+        if (StringUtils.isEmpty(request.getCsvEncode())) {
+            request.setCsvEncode("UTF-8");
+        }
+
+        request.setCsvSeparator(csvSeparator);
+        request.setCsvEncode(csvEncode);
+
+        saveDataServiceRequest(request);
+
         requestDeploy(request);
         return Response.ok().build();
     }

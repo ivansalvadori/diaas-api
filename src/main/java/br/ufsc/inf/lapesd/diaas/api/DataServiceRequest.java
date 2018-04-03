@@ -9,6 +9,8 @@ public class DataServiceRequest {
     private String mappingFileBase64;
     private String dataFileBase64;
     private String ontologyFileBase64;
+    private String csvSeparator;
+    private String csvEncode;
 
     public DataServiceRequest(String requestId) {
         super();
@@ -54,6 +56,22 @@ public class DataServiceRequest {
 
     public void setOntologyFileBase64(String ontologyFileBase64) {
         this.ontologyFileBase64 = ontologyFileBase64;
+    }
+
+    public String getCsvSeparator() {
+        return csvSeparator;
+    }
+
+    public void setCsvSeparator(String csvSeparator) {
+        this.csvSeparator = csvSeparator;
+    }
+
+    public String getCsvEncode() {
+        return csvEncode;
+    }
+
+    public void setCsvEncode(String csvEncode) {
+        this.csvEncode = csvEncode;
     }
 
 }
